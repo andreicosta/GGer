@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
-#define max_value 10
-#define num_nodos 1000
+#define max_value 100
+#define num_nodos 2000
 #define dens 0.1
+#define prec 100000
 #define filename "in.txt"
 
 int main(){
@@ -16,10 +18,8 @@ int main(){
 	
 	for(i=0;i<num_nodos;i++){
 		for(j=0;j<num_nodos;j++){
-			if (i!=j){
-				if (dens == 1 || (rand()%(int)(1./dens))*dens < dens)
-					fprintf(arq, "%d %d ", j, rand()%max_value+1);
-			}
+			if (i!=j && (dens == 1 || (rand()%prec) < dens*prec))
+				fprintf(arq, "%d %d ", j, rand()%max_value+1);
 		}
 		fprintf(arq, "\n");
 	}
